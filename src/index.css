@@ -39,6 +39,9 @@ body{
     overflow: auto;
     outline: none;
 }
+.inputBody > *{
+  margin: 10px;
+}
 .outputElement{
   padding-top: 50px;
   margin-left:auto;
@@ -75,6 +78,10 @@ svg{
   margin:auto;
   
 }
+code{
+  display:block;
+  background-color: white;
+}
 
 .previewerBody{
   width:100%;
@@ -84,6 +91,9 @@ svg{
   overflow-wrap: break-word;
   overflow: auto;
   text-align: left;
+}
+.previewerBody > *{
+  margin: 10px;
 }
 
 

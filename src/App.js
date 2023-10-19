@@ -41,6 +41,7 @@ class App extends React.Component{
       });
   }
   render(){
+    const arr = this.state.input.split(/\n/);
     return (
       <div className="App">
       <Input inputStyle={this.state.inputStyle} handleInputClick={this.handleInputClick} handleChange={this.handleChange} value={this.state.input}/>
