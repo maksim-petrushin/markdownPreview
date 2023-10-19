@@ -1,3 +1,4 @@
+
 import Input from "./components/Input.js"
 import Output from "./components/Output.js"
 import React from "react"
@@ -8,69 +9,43 @@ class App extends React.Component{
     super(props);
     
     this.state = {
-      input:""
+      input:"",
+      inputStyle: " inputNormal",
+      outputStyle: " outputNormal"
     }
     this.handleChange = this.handleChange.bind(this);
+    this.handleInputClick = this.handleInputClick.bind(this);
+    this.handleOutputClick = this.handleOutputClick.bind(this);
   }
   handleChange(event){
     this.setState({
       input :event.target.value
     });
   }
+  handleInputClick(){
+    this.setState((state)=>{
+      if(state.inputStyle===" inputNormal"){
+        return {inputStyle:" inputMax",outputStyle:" invisible"}}
+      else if(state.inputStyle===" inputMax"){
+        return {inputStyle:" inputNormal",outputStyle:" outputNormal" }
+      }
+      });
+  }
+  handleOutputClick(){
+    this.setState((state)=>{
+      if(state.outputStyle===" outputNormal"){
+        return {outputStyle:" outputMax",inputStyle:" invisible"}}
+      else if(state.outputStyle===" outputMax"){
+        return {outputStyle:" outputNormal",inputStyle:" inputNormal"}
+      }
+      });
+  }
   render(){
-    const arr = this.state.input.split("\n")
-    const styleArr = arr.map((obj)=>{
-      //h1
-      if(/^#$/.test(obj)){
-        return "h1";
-      }
-      if(/^##$/.test(obj)){
-        return "h2";
-      }
-      if(/^###$/.test(obj)){
-        return "h3";
-      }
-      else if(/^#\s/.test(obj)){
-        return "h1";
-      }
-      else if(/^##\s/.test(obj)){
-        return "h2";
-      }
-      else if(/^###\s/.test(obj)){
-        return "h3";
-      }
-      else{
-        return "normal"
-      }
-    })
-    const modifiedArr = arr.map((obj)=>{
-      //h1
-      if(/^#$/.test(obj)){
-        return " ";
-      }
-      if(/^##$/.test(obj)){
-        return " ";
-      }
-      if(/^###$/.test(obj)){
-        return " ";
-      }
-      else if(/^#\s/.test(obj)){
-        return obj.slice(2, obj.length);
-      }
-      else if(/^##\s/.test(obj)){
-        return obj.slice(3, obj.length);
-      }
-      else if(/^###\s/.test(obj)){
-        return obj.slice(4, obj.length);
-      }
-      else{
-        return obj
-      }
-    })
     return (
-      <div className="App" >
-      <Input className="inputElement" handleChange={this.handleChange} value={this.state.input}/>
-      <Output className="outputElement" arr={arr} styleArr={styleArr} modifiedArr={modifiedArr} text={this.state.input}/>
+      <div className="App">
+      <Input inputStyle={this.state.inputStyle} handleInputClick={this.handleInputClick} handleChange={this.handleChange} value={this.state.input}/>
+      <Output outputStyle={this.state.outputStyle} handleOutputClick={this.handleOutputClick} text={this.state.input}/>
+      
     </div>
   );
 }
